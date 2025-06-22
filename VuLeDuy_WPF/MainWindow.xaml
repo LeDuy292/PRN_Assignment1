@@ -1,0 +1,193 @@
+﻿<Window x:Class="VuLeDuy_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VuLeDuy_WPF"
+        mc:Ignorable="d"
+        Title="FU Mini Hotel System" Height="670" Width="710"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#0099FF" Offset="0"/>
+                <GradientStop Color="#FF347BDA" Offset="0.794"/>
+                <GradientStop Color="#FF60B1E7" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="513*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="FU Mini Hotel System" Grid.Column="2" Grid.Row="0" FontSize="36" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="466"/>
+        <Button x:Name="btnLogout" Content="Đăng Xuất" Grid.Column="3" Grid.Row="0" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Click="btnLogout_Click"/>
+        <TabControl x:Name="tabControl" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2">
+            <!-- Tab Phòng (Chỉ Admin) -->
+            <TabItem x:Name="tabRooms" Header="Phòng">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Mã Phòng"/>
+                    <TextBox x:Name="txtRoomID" Grid.Row="0" Margin="80,0,0,0" IsEnabled="False"/>
+                    <Label Content="Số Phòng" Grid.Row="1"/>
+                    <TextBox x:Name="txtRoomNumber" Grid.Row="1" Margin="80,0,0,0"/>
+                    <Label Content="Giá" Grid.Row="2"/>
+                    <TextBox x:Name="txtRoomPrice" Grid.Row="2" Margin="80,0,0,0"/>
+                    <Label Content="Sức Chứa" Grid.Row="3"/>
+                    <TextBox x:Name="txtMaxCapacity" Grid.Row="3" Margin="80,0,0,0"/>
+                    <Label Content="Loại Phòng" Grid.Row="4"/>
+                    <ComboBox x:Name="cboRoomType" Grid.Row="4" Margin="80,0,0,0" DisplayMemberPath="RoomTypeName" SelectedValuePath="RoomTypeID"/>
+                    <DataGrid x:Name="dgRooms" Grid.Row="5" AutoGenerateColumns="False" SelectionChanged="dgRooms_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã Phòng" Binding="{Binding RoomID}"/>
+                            <DataGridTextColumn Header="Số Phòng" Binding="{Binding RoomNumber}"/>
+                            <DataGridTextColumn Header="Giá" Binding="{Binding RoomPricePerDate}"/>
+                            <DataGridTextColumn Header="Sức Chứa" Binding="{Binding RoomMaxCapacity}"/>
+                            <DataGridTextColumn Header="Trạng Thái" Binding="{Binding RoomStatus}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Row="6" Orientation="Horizontal">
+                        <Button x:Name="btnCreateRoom" Content="Thêm" Width="100" Margin="5" Click="btnCreateRoom_Click"/>
+                        <Button x:Name="btnUpdateRoom" Content="Cập Nhật" Width="100" Margin="5" Click="btnUpdateRoom_Click"/>
+                        <Button x:Name="btnDeleteRoom" Content="Xóa" Width="100" Margin="5" Click="btnDeleteRoom_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <!-- Tab Khách Hàng (Chỉ Admin) -->
+            <TabItem x:Name="tabCustomers" Header="Khách Hàng">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Mã Khách Hàng"/>
+                    <TextBox x:Name="txtCustomerID" Grid.Row="0" Margin="80,0,0,0" IsEnabled="False"/>
+                    <Label Content="Họ Tên" Grid.Row="1"/>
+                    <TextBox x:Name="txtFullName" Grid.Row="1" Margin="80,0,0,0"/>
+                    <Label Content="Email" Grid.Row="2"/>
+                    <TextBox x:Name="txtEmail" Grid.Row="2" Margin="80,0,0,0"/>
+                    <Label Content="Điện Thoại" Grid.Row="3"/>
+                    <TextBox x:Name="txtTelephone" Grid.Row="3" Margin="80,0,0,0"/>
+                    <Label Content="Ngày Sinh" Grid.Row="4"/>
+                    <DatePicker x:Name="dpBirthday" Grid.Row="4" Margin="80,0,0,0"/>
+                    <DataGrid x:Name="dgCustomers" Grid.Row="5" AutoGenerateColumns="False" SelectionChanged="dgCustomers_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã KH" Binding="{Binding CustomerID}"/>
+                            <DataGridTextColumn Header="Họ Tên" Binding="{Binding CustomerFullName}"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding EmailAddress}"/>
+                            <DataGridTextColumn Header="Điện Thoại" Binding="{Binding Telephone}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Row="6" Orientation="Horizontal">
+                        <Button x:Name="btnCreateCustomer" Content="Thêm" Width="100" Margin="5" Click="btnCreateCustomer_Click"/>
+                        <Button x:Name="btnUpdateCustomer" Content="Cập Nhật" Width="100" Margin="5" Click="btnUpdateCustomer_Click"/>
+                        <Button x:Name="btnDeleteCustomer" Content="Xóa" Width="100" Margin="5" Click="btnDeleteCustomer_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <!-- Tab Hồ Sơ (Chỉ Customer) -->
+            <TabItem x:Name="tabProfile" Header="Hồ Sơ">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Họ Tên"/>
+                    <TextBox x:Name="txtProfileFullName" Margin="80,0,0,0"/>
+                    <Label Content="Email" Grid.Row="1"/>
+                    <TextBox x:Name="txtProfileEmail" Grid.Row="1" Margin="80,0,0,0"/>
+                    <Label Content="Điện Thoại" Grid.Row="2"/>
+                    <TextBox x:Name="txtProfileTelephone" Grid.Row="2" Margin="80,0,0,0"/>
+                    <Label Content="Ngày Sinh" Grid.Row="3"/>
+                    <DatePicker x:Name="dpProfileBirthday" Grid.Row="3" Margin="80,0,0,0"/>
+                    <Button x:Name="btnUpdateProfile" Content="Cập Nhật Hồ Sơ" Grid.Row="5" Width="100" Margin="5" Click="btnUpdateProfile_Click"/>
+                </Grid>
+            </TabItem>
+            <!-- Tab Đặt Phòng (Chỉ Customer) -->
+            <TabItem x:Name="tabNewBooking" Header="Đặt Phòng">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Danh Sách Phòng Trống" Grid.Row="0"/>
+                    <DataGrid x:Name="dgNewAvailableRooms" Grid.Row="1" AutoGenerateColumns="False" SelectionChanged="dgNewAvailableRooms_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã Phòng" Binding="{Binding RoomID}"/>
+                            <DataGridTextColumn Header="Số Phòng" Binding="{Binding RoomNumber}"/>
+                            <DataGridTextColumn Header="Giá" Binding="{Binding RoomPricePerDate}"/>
+                            <DataGridTextColumn Header="Sức Chứa" Binding="{Binding RoomMaxCapacity}"/>
+                            <DataGridTextColumn Header="Loại Phòng" Binding="{Binding RoomTypeName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <Label Content="Ngày Bắt Đầu"/>
+                        <DatePicker x:Name="dpNewBookingDate" Width="150" Margin="5" SelectedDateChanged="dpNewBookingDate_SelectedDateChanged"/>
+                        <Label Content="Ngày Kết Thúc"/>
+                        <DatePicker x:Name="dpNewEndDate" Width="150" Margin="5"/>
+                        <Button x:Name="btnNewBookRoom" Content="Đặt Phòng" Width="100" Margin="5" Click="btnNewBookRoom_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <!-- Tab Lịch Sử Đặt Phòng (Chỉ Customer) -->
+            <TabItem x:Name="tabBookingHistory" Header="Lịch Sử Đặt Phòng">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Lịch Sử Đặt Phòng" Grid.Row="0"/>
+                    <DataGrid x:Name="dgBookingHistory" Grid.Row="1" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã Đặt Phòng" Binding="{Binding BookingID}"/>
+                            <DataGridTextColumn Header="Ngày Bắt Đầu" Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Header="Ngày Kết Thúc" Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Header="Tổng Giá" Binding="{Binding TotalPrice}"/>
+                            <DataGridTextColumn Header="Số Phòng" Binding="{Binding RoomNumber}"/>
+                            <DataGridTextColumn Header="Trạng Thái" Binding="{Binding BookingStatus}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <!-- Tab Báo Cáo Thống Kê (Chỉ Admin) -->
+            <TabItem x:Name="tabReport" Header="Báo Cáo Thống Kê">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="dgReport" Grid.Row="0" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã Đặt Phòng" Binding="{Binding BookingID}"/>
+                            <DataGridTextColumn Header="Ngày Bắt Đầu" Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Header="Tổng Giá" Binding="{Binding TotalPrice}"/>
+                            <DataGridTextColumn Header="Khách Hàng" Binding="{Binding CustomerFullName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
